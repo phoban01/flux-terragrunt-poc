@@ -1,0 +1,20 @@
+source:
+  kind: GitRepository
+  fieldPath: spec.url
+  options:
+    delimiter: '/'
+    index: 4 # repository name
+targets:
+- select:
+    kind: GitRepository
+  fieldPaths:
+  - metadata.name
+- select:
+    kind: Kustomization
+  fieldPaths:
+  - metadata.name
+- select:
+    kind: Terraform
+  fieldPaths:
+  - metadata.name
+  - spec.sourceRef.name

@@ -1,0 +1,7 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: tf-dev
+nameSuffix: -dev
+resources:
+- ns.yaml
+- kustomize.yaml

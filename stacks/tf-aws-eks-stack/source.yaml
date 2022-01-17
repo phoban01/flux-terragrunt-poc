@@ -1,0 +1,3 @@
+- op: add
+  path: /spec/url
+  value: ssh://git@github.com/phoban01/tf-aws-eks-stack

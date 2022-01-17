@@ -1,0 +1,11 @@
+apiVersion: infra.contrib.fluxcd.io/v1alpha1
+kind: Terraform
+metadata:
+  name: stack
+spec:
+  path: ./
+  sourceRef:
+    kind: GitRepository
+    name: stack
+  varsFrom:
+    name: vars

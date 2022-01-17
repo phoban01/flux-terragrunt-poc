@@ -1,0 +1,30 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+configMapGenerator:
+- name: vars
+  envs:
+  - account.env
+  - ../region.env
+  - ../../environment.env
+  - ../../../globals.env
+generatorOptions:
+  disableNameSuffixHash: true
+replacements:
+- path: ../../../../_transforms/account-prefix.yaml
+- path: ../../../../_transforms/env-prefix.yaml
+- path: ../../../../_transforms/region-prefix.yaml
+- path: ../../../../_transforms/account-labels.yaml
+- path: ../../../../_transforms/env-labels.yaml
+- path: ../../../../_transforms/region-labels.yaml
+resources:
+- ../../../../stacks/tf-aws-iam-stack/
+- ../../../../stacks/tf-aws-eks-stack/
+patchesJson6902:
+- target:
+    kind: GitRepository
+    name: tf-aws-iam-stack
+  path: versions/tf-aws-iam-stack.yaml
+- target:
+    kind: GitRepository
+    name: tf-aws-eks-stack
+  path: versions/tf-aws-eks-stack.yaml

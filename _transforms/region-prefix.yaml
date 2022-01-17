@@ -1,0 +1,35 @@
+source:
+  kind: ConfigMap
+  fieldPath: data.region
+targets:
+- select:
+    kind: GitRepository
+  fieldPaths:
+  - metadata.name
+  options:
+    delimiter: "-"
+    index: -3
+- select:
+    kind: Kustomization
+  fieldPaths:
+  - metadata.name
+  - spec.dependsOn.name
+  options:
+    delimiter: "-"
+    index: -2
+- select:
+    kind: Terraform
+  fieldPaths:
+  - metadata.name
+  - spec.sourceRef.name
+  - spec.varsFrom.name
+  options:
+    delimiter: "-"
+    index: -3
+- select:
+    kind: ConfigMap
+  fieldPaths:
+  - metadata.name
+  options:
+    delimiter: "-"
+    index: -3

@@ -1,0 +1,22 @@
+source:
+  kind: ConfigMap
+  fieldPath: data.account_name
+targets:
+- select:
+    kind: GitRepository
+  fieldPaths:
+  - metadata.labels.tf-flux/account
+  options:
+    create: true
+- select:
+    kind: Terraform
+  fieldPaths:
+  - metadata.labels.tf-flux/account
+  options:
+    create: true
+- select:
+    kind: Kustomization
+  fieldPaths:
+  - metadata.labels.tf-flux/account
+  options:
+    create: true
