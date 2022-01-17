@@ -6,7 +6,7 @@ This repo emulates the behavior of Terragrunt using Kustomize and the Terraform 
 
 One of Terragrunt's strengths is the ability to reduce the repetition required for multi-environment, multi-account, and potentially, multi-region configurations; this repository contains a set of dummy Terraform resources (stacks) provisioned in such a setup, using Kustomize, Flux and the Terraform controller to achieve the same behavior.
 
-The structure of the repository is as follows:
+The structure of the repo and function of the various kustomizations is described below.
 
 ### Environments
 
@@ -190,8 +190,8 @@ Render stg account-01 stacks in the eu-west-1 region:
 `kustomize build --load-restrictor=LoadRestrictionsNone stg/eu-west-1/account-01/`
 
 ## Questions
-- dependencies: can be done with Kustomize but makes
-- variables: can't do variable inheritance and passing outputs between stacks until we `varsFrom` supports multiple inputs.
+- dependencies: can be done with Kustomize but creates difficulties in relation to variable inheritance
+- variables: can't do variable inheritance alongside passing outputs between stacks until we `varsFrom` supports multiple inputs.
 - auth: how best to configure sts / impersonation per account?
 
 ## Deploying
