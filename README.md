@@ -181,13 +181,30 @@ _transforms
 └── name-from-repo.yaml
 ```
 
-## Render examples
+## Rendering Resources
 
 Render all dev accounts' stacks:
 `kustomize build --load-restrictor=LoadRestrictionsNone dev/`
 
-Render stg account-01 stacks in the eu-west-1 region:
+Render staging stacks for account alias `account-01` in the `eu-west-1` region:
 `kustomize build --load-restrictor=LoadRestrictionsNone stg/eu-west-1/account-01/`
+
+`./terraform/stg/us-east-1/kustomization.yaml` demonstrates patching a resource to override a variable for a particular region, in this case the number of eks worker nodes:
+
+```yaml
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+patches:
+- target:
+    kind: ConfigMap
+  patch: |-
+    - op: replace
+      path: /data/eks_node_count
+      value: 20
+resources:
+- account-01/
+- account-02/
+```
 
 ## Questions
 - dependencies: can be done with Kustomize but creates difficulties in relation to variable inheritance
