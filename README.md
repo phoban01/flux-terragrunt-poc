@@ -1,6 +1,6 @@
-# Terragrunt pattern with Flux & Kustomize 
+# Terragrunt pattern with Flux & Kustomize 🚧
 
-### Proof-of-concept 
+### ⚠️ Proof-of-concept
 
 ## Overview
 
