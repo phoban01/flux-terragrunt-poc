@@ -1,10 +1,12 @@
-# Terragrunt pattern with Flux & Kustomize
+# Terragrunt pattern with Flux & Kustomize 
+
+### Proof-of-concept 
 
 ## Overview
 
 This repo emulates the behavior of Terragrunt using Kustomize and the Terraform controller for flux.
 
-One of Terragrunt's strengths is the ability to reduce the repetition required for multi-environment, multi-account, and potentially, multi-region configurations; this repository contains a set of dummy Terraform resources (stacks) provisioned in such a setup, using Kustomize, Flux and the Terraform controller to achieve the same behavior.
+One of Terragrunt's strengths is the ability to reduce the repetition required for multi-environment, multi-account, and potentially, multi-region configurations; this repository contains a set of dummy Terraform resources (stacks) provisioned in the manner of a typical Terragrunt project but using Kustomize, Flux and the Terraform controller to achieve the same behavior.
 
 The structure of the repo and function of the various kustomizations is described below.
 
@@ -35,11 +37,11 @@ environments/ # <- This is the flux entrypoint
 
 ### Stacks
 
-Stacks contains the base resources we are used to model different logical groups of infrastructure.
+Stacks contains the base resources used to model different logical groups of infrastructure.
 
-Each stack consists of a `GitRepository` and `Terraform` base for which the source repository is patched in the stack overlay.
+Each stack consists of a `GitRepository` and `Terraform` base for which the source repository is patched in the stack-overlay.
 
-Ideally, dependencies between stacks would be expressed at this point but this is currently difficult to achieve. By way of example, the `tf-aws-eks-stack` overlay contains an dependencies file which illustrates how it might be possible to specify dependencies if the `Terraform` resource supported this api.
+Ideally, dependencies between stacks would be expressed at this level, but this functionality is currently difficult to achieve. By way of example, the `tf-aws-eks-stack` overlay contains an dependencies file which illustrates how it might be possible to specify dependencies if the `Terraform` resource supported this api.
 
 ```
 stacks
@@ -60,7 +62,7 @@ stacks
 
 The Terraform directory contains the final layer of overlays which will render the full set of manifests for each environment. An env-vars file is present at each layer of the directory tree and these are collected by a kustomize `configMapGenerator` in each account. This mechanism enables scoping variables in manner similar to Terragrunt. This approach can be combined with kustomize patches to override variables and settings at any point in the file-system hierarchy. Currently the `varFrom` field in the Flux Terraform controller spec only supports passing a single `ConfigMap` which necessitates this approach and limits the ability to pass outputs between stacks but future work is planned to address this limitation.
 
-Accounts specify the appropriate set of stacks and use a patch to set the semver tag for stack in question. This approach enables stacks to be promoted between accounts, regions and environment.
+Accounts specify the appropriate set of stacks and use a patch to set the semver tag for the stack in question. This approach enables stacks to be promoted between accounts, regions and environments.
 
 ```
 terraform
