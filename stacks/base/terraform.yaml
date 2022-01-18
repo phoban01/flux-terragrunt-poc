@@ -8,4 +8,5 @@ spec:
     kind: GitRepository
     name: stack
   varsFrom:
+  - kind: ConfigMap
     name: vars

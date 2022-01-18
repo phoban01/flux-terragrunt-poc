@@ -1,0 +1,7 @@
+- op: add
+  path: /spec/varsFrom/0
+  value:
+    kind: Secret
+    name: tf-aws-iam-stack-outputs
+    varsKeys:
+    - eks-role-arn

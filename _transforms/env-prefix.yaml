@@ -21,8 +21,10 @@ targets:
     kind: Terraform
   fieldPaths:
   - metadata.name
-  - spec.varsFrom.name
   - spec.sourceRef.name
+  - spec.varsFrom.0.name
+  - spec.varsFrom.1.name
+  - spec.writeOutputsToSecret.name
   options:
     delimiter: "-"
     index: -1

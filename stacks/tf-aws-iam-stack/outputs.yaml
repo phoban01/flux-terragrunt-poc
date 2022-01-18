@@ -1,0 +1,6 @@
+- op: add
+  path: /spec/writeOutputsToSecret
+  value:
+    name: stack-outputs
+    outputs:
+    - eks-role-arn

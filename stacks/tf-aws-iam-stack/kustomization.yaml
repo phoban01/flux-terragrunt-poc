@@ -9,3 +9,7 @@ patchesJson6902:
   target:
     kind: GitRepository
     name: stack
+- path: outputs.yaml
+  target:
+    kind: Terraform
+    name: stack

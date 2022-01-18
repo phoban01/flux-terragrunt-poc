@@ -9,6 +9,10 @@ patchesJson6902:
   target:
     kind: GitRepository
     name: stack
+- path: inputs.yaml
+  target:
+    kind: Terraform
+    name: stack
 # not possible without dependency support in terraform controller
 # - path: dependencies.yaml
 #   target:
