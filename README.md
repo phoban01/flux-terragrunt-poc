@@ -256,7 +256,7 @@ kubectl patch deploy -n flux-system tf-controller --type=json -p \
     {   "op": "add",
         "path": "/spec/template/spec/containers/0/env/0",
         "value": {
-            "name": "AWS_SECRET_ACCESS_KEY",
+            "name": "AWS_ACCESS_KEY_ID",
             "valueFrom": {
                 "secretKeyRef": {
                     "name": "aws-creds",
